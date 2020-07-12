@@ -3,7 +3,7 @@ import json
 
 
 def recopilacion():
-    driver = webdriver.Chrome(executable_path=r"C:\Users\manuo\Downloads\chromedriver.exe")
+    driver = webdriver.Chrome(executable_path=r"drivers\chromedriver.exe")
     driver.get('http://example.webscraping.com/places/default/index/')
 
     revisar_pagina = True
