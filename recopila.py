@@ -3,8 +3,17 @@ import json
 
 
 def recopilacion():
-    driver = webdriver.Chrome(executable_path=r"drivers\chromedriver.exe")
+    driver = webdriver.Chrome(executable_path=r"C:\Users\manuo\Downloads\chromedriver.exe")
     driver.get('http://example.webscraping.com/places/default/index/')
+
+    #Verificador de datos existentes en dato_pais.json
+    with open('templates/dato_pais.json') as json_data:
+        data = json.load(json_data)
+        for a in data['paises'][:]:
+            if a['nombrePais'] != '':  #Se elimina paises registrados anteriormente
+                data['paises'].remove(a)
+                with open('templates/dato_pais.json', 'w') as f:
+                    json.dump(data, f)
 
     revisar_pagina = True
     while revisar_pagina:
@@ -16,7 +25,6 @@ def recopilacion():
             data = json.load(f)
         for i in range(len(siguiente_pagina)):
             cant_tag_a = len(siguiente_pagina)
-
             if cant_tag_a == 1:
                 if siguiente_pagina[i].text == 'Next >':
                     for e in range(cantidad_pais):
@@ -49,6 +57,7 @@ def recopilacion():
                 else:
                     revisar_pagina = False
                     break
+    # Inicio de Relleno de datos de Nueva Zelanda
     driver.get('http://example.webscraping.com/places/default/view/New-Zealand-159')
     with open('templates/dato_pais.json', 'r') as f:
         data = json.load(f)
