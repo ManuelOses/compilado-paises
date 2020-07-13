@@ -7,12 +7,12 @@ def recopilacion():
     driver.get('http://example.webscraping.com/places/default/index/')
 
     #Verificador de datos existentes en dato_pais.json
-    with open('templates/dato_pais.json') as json_data:
+    with open('dato_pais.json') as json_data:
         data = json.load(json_data)
         for a in data['paises'][:]:
             if a['nombrePais'] != '':  #Se elimina paises registrados anteriormente
                 data['paises'].remove(a)
-                with open('templates/dato_pais.json', 'w') as f:
+                with open('dato_pais.json', 'w') as f:
                     json.dump(data, f)
 
     revisar_pagina = True
@@ -21,7 +21,7 @@ def recopilacion():
         cantidad_pais = len(paises)
         pagination = driver.find_element_by_id('pagination')
         siguiente_pagina = pagination.find_elements_by_tag_name('a')
-        with open('templates/dato_pais.json') as f:
+        with open('dato_pais.json') as f:
             data = json.load(f)
         for i in range(len(siguiente_pagina)):
             cant_tag_a = len(siguiente_pagina)
@@ -30,7 +30,7 @@ def recopilacion():
                     for e in range(cantidad_pais):
                         revisar_pagina = True
                         data['paises'].append({'nombrePais': paises[e].text})
-                    with open('templates/dato_pais.json', 'w') as f:
+                    with open('dato_pais.json', 'w') as f:
                         json.dump(data, f)
                     siguiente_pagina[i].click()
 
@@ -38,7 +38,7 @@ def recopilacion():
                     for e in range(cantidad_pais):
                         revisar_pagina = False
                         data['paises'].append({'nombrePais': paises[e].text})
-                    with open('templates/dato_pais.json', 'w') as f:
+                    with open('dato_pais.json', 'w') as f:
                         json.dump(data, f)
                 else:
                     revisar_pagina = False
@@ -48,7 +48,7 @@ def recopilacion():
                     for e in range(cantidad_pais):
                         revisar_pagina = True
                         data['paises'].append({'nombrePais': paises[e].text})
-                    with open('templates/dato_pais.json', 'w') as f:
+                    with open('dato_pais.json', 'w') as f:
                         json.dump(data, f)
                     siguiente_pagina[i].click()
                 elif siguiente_pagina[i].text == '< Previous':
@@ -59,7 +59,7 @@ def recopilacion():
                     break
     # Inicio de Relleno de datos de Nueva Zelanda
     driver.get('http://example.webscraping.com/places/default/view/New-Zealand-159')
-    with open('templates/dato_pais.json', 'r') as f:
+    with open('dato_pais.json', 'r') as f:
         data = json.load(f)
     fila = driver.find_elements_by_tag_name('tr')
     seguimiento_nz_json = True
@@ -81,7 +81,7 @@ def recopilacion():
                         valor = "NULL"
                     elemento[tipo] = valor
                 seguimiento_nz_json = False
-                with open('templates/dato_pais.json', 'w') as e:
+                with open('dato_pais.json', 'w') as e:
                     json.dump(data, e)
             else:
                 seguimiento_nz_json = True
