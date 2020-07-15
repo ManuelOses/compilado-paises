@@ -3,7 +3,7 @@ import json
 
 
 def recopilacion():
-    driver = webdriver.Chrome(executable_path=r"C:\Users\manuo\Downloads\chromedriver.exe")
+    driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe")
     driver.get('http://example.webscraping.com/places/default/index/')
 
     #Verificador de datos existentes en dato_pais.json
