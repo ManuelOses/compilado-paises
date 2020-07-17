@@ -9,7 +9,8 @@ def recopilacion():
     opcion_chrome.add_argument("--headless")
     opcion_chrome.add_argument("--disable-dev-shm-usage")
     opcion_chrome.add_argument("--no-sandbox")
-    driver= webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
+    #driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe")
     driver.get('http://example.webscraping.com/places/default/index/')
 
     # Verificador de datos existentes en dato_pais.json
