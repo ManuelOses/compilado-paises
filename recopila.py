@@ -1,26 +1,21 @@
 from selenium import webdriver
 import json
+import eliminar_paises
 import os
 
 
 def recopilacion():
-    opcion_chrome = webdriver.ChromeOptions()
-    opcion_chrome.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    opcion_chrome.add_argument("--headless")
-    opcion_chrome.add_argument("--disable-dev-shm-usage")
-    opcion_chrome.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
-    #driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe")
+    # opcion_chrome = webdriver.ChromeOptions()
+    # opcion_chrome.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # opcion_chrome.add_argument("--headless")
+    # opcion_chrome.add_argument("--disable-dev-shm-usage")
+    # opcion_chrome.add_argument("--no-sandbox")
+    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
+    driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe")
     driver.get('http://example.webscraping.com/places/default/index/')
 
     # Verificador de datos existentes en dato_pais.json
-    with open('dato_pais.json') as json_data:
-        data = json.load(json_data)
-        for a in data['paises'][:]:
-            if a['nombrePais'] != '':  # Se elimina paises registrados anteriormente
-                data['paises'].remove(a)
-                with open('dato_pais.json', 'w') as f:
-                    json.dump(data, f)
+    eliminar_paises.eliminar()
 
     revisar_pagina = True
     while revisar_pagina:

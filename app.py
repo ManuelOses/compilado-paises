@@ -1,7 +1,7 @@
 from flask import Flask, render_template, jsonify
 import json
 import recopila
-import eliminacion_manual
+import eliminar_paises
 
 app = Flask(__name__)
 
@@ -25,7 +25,7 @@ def leerjson():
 
 @app.route('/eliminar')
 def eliminar():
-    eliminacion_manual.eliminar_datos()
+    eliminar_paises.eliminar()
     return render_template('eliminado.html')
 
 
