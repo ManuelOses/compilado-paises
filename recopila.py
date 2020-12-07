@@ -5,13 +5,16 @@ import os
 
 
 def recopilacion():
-    # opcion_chrome = webdriver.ChromeOptions()
-    # opcion_chrome.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    # opcion_chrome.add_argument("--headless")
-    # opcion_chrome.add_argument("--disable-dev-shm-usage")
-    # opcion_chrome.add_argument("--no-sandbox")
-    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
-    driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe")
+    # Eliminar comillas en caso de que se ejecute en un servidor remoto
+    '''
+    opcion_chrome = webdriver.ChromeOptions()
+    opcion_chrome.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    opcion_chrome.add_argument("--headless")
+    opcion_chrome.add_argument("--disable-dev-shm-usage")
+    opcion_chrome.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=opcion_chrome)
+    '''
+    driver = webdriver.Chrome(executable_path=r"Drivers\chromedriver.exe") #Eliminar esta linea de codigo para ejecutar en servidor remoto
     driver.get('http://example.webscraping.com/places/default/index/')
 
     # Verificador de datos existentes en dato_pais.json
